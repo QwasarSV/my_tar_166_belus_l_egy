@@ -3,7 +3,7 @@
 
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head) 
 {
-    int fd = 0, write_fd = 0, write_archive_fd = 0, ref = 0, index = 0 ;
+    int fd = 0, write_fd = 0, write_archive_fd = 0, ref = 0, index = 0;
     ref = index;
     ph_t* ph;
     printf("nbrstr : %i\n", getopt_ptr->nbr_str);

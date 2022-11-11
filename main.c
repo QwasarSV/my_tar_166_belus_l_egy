@@ -1,7 +1,7 @@
 #include "include/main_header.h"
 
 #include <stdio.h>
-
+// NOT FINAL WIP
 //mytar [OPTION]... [ -f archive.tar] [dir1] [dir2] [dir3]
 
 int main(int argc, char** argv)

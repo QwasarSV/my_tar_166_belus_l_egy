@@ -147,6 +147,8 @@ char* unsigned_itoa(unsigned long int value, char* result, int base);
 //long long oct_to_dec(int value);
 int oct_to_dec(int value);
 //long long oct_to_dec(long long int value);
+char* itoa_long_long(long long value, char* result, int base);
+
 int my_iterative_pow(int value, int power);
 int my_ctoi(char *string, size_t n);
 
