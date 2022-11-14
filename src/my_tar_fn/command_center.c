@@ -4,7 +4,7 @@ void command_center(my_getopt_t* getopt_ptr, node_t* m_head)
 {
 
 
-    if (getopt_ptr->bool_arr[0] == 1)
+        if (getopt_ptr->bool_arr[0] == 1)
     {
 
     }

@@ -8,6 +8,10 @@
 #include <stdbool.h>
 #include<fcntl.h>
 
+#include <pwd.h>
+#include <grp.h>
+
+
 #ifndef STRUCT_NODE
 #define STRUCT_NODE
 struct node 
@@ -65,8 +69,18 @@ typedef struct posix_header
 } ph_t;
 #endif
 
-
-
+/*
+    S_IFMT     0170000   bit mask for the file type bit field
+    '0'    S_IFREG    0100000   regular file
+    '1'    HARD_LINK ?
+    '2'    S_IFLNK    0120000   symbolic link
+    '3'    S_IFCHR    0020000   character device
+    '4'    S_IFBLK    0060000   block device
+    '5'    S_IFDIR    0040000   directory
+    '6'    S_IFIFO    0010000   FIFO
+    '?'    S_IFSOCK   0140000   socket
+*/
+           
 
 #define BADCHAR (int)'?'
 #define BADARG (int)':'
@@ -76,7 +90,7 @@ typedef struct posix_header
 
 
 
-
+char my_is_type(struct stat st);
 void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
 // myls core components
 int flag_parser(int argc, char **argv, char *valid_args, my_getopt_t *getopt_ptr);

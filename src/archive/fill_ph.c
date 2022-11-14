@@ -2,13 +2,19 @@
 //#include "../../include/my_stdio.h"
 #include <stdio.h>
 
-
+// test function TO BE REWORKWED
 
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name)
 {
     node_t* tmp = head;
     char *tmp_str = malloc(sizeof(char)*9);
     char *tmp_str_tim = malloc(sizeof(char)*12);
+    //struct passwd *pwd;
+    //uid_t  uid=0;
+
+  
+
+
     while (tmp != NULL)
     {
         // printf("phsize %s\n", file_name);
@@ -31,24 +37,26 @@ ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name)
             my_strcpy(ph->mtime, itoa_long_long(tmp->st.st_mtim.tv_sec, tmp_str_tim , 8));
             
             //my_strcpy(ph->chksum, tmp->st.); // SUM OF ALL ASCII OCTAL VALUE IN HEADER ==> IN ORDER, SUM HEADER THEN CHECKSUM THEN UPDATE HEADER SUM
+            //printf("type : %c \n",my_is_type(tmp->st));
+            ph->typeflag = my_is_type(tmp->st);
+            //my_strcpy(, );
             
-            //my_strcpy(ph->typeflag, tmp->);
-            
-            //my_strcpy(ph->linkname, tmp->);
+            //my_strcpy(ph->linkname, ); // find the linkedname. 
 
-            //my_strcpy(ph->magic, tmp->st.);
+            my_strcpy(ph->magic, "ustar"); // no !
             
-            //my_strcpy(ph->version, );
+            my_strcpy(ph->version,"00");
+            //printf("type : %lli \n",tmp->st.st_dev);
             
-            //my_strcpy(ph->uname, tmp->st.st_dev);
+            //pwd = getpwuid()
+            my_strcpy(ph->uname, getpwuid(tmp->st.st_uid)->pw_name);
+            my_strcpy(ph->gname, getgrgid(tmp->st.st_gid)->gr_name);
             
-            //my_strcpy(ph->gname, tmp->st);
+            //my_strcpy(ph->devmajor, tmp->st); // duntcar ? 
             
-            //my_strcpy(ph->devmajor, tmp->st);
+            //my_strcpy(ph->devminor, tmp->st); // duntcar ?
             
-            //my_strcpy(ph->devminor, tmp->st);
-            
-            //my_strcpy(ph->prefix, tmp->st);
+            //my_strcpy(ph->prefix, tmp->st); // test does not include file name > 100 char
         }
         tmp = tmp->next;
     }
