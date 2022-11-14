@@ -80,7 +80,7 @@ typedef struct posix_header
     '6'    S_IFIFO    0010000   FIFO
     '?'    S_IFSOCK   0140000   socket
 */
-           
+
 
 #define BADCHAR (int)'?'
 #define BADARG (int)':'
@@ -140,11 +140,11 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head);
 void get_archive_info(my_getopt_t *getopt_ptr);
 void archive_to_file(my_getopt_t *getopt_ptr);
 
-void write_to_archive(int fd, int write_fd, int write_archive_fd, ph_t* ph);
+int write_to_archive(int fd, int write_fd, int write_archive_fd, ph_t* ph);
 void read_archive(int fd, ph_t* ph);
 void test_archive(int fd, ph_t* ph);
 
-void write_to_file(int fd, int write_fd, int write_file_fd, int file_size);
+int write_to_file(int fd, int write_fd, int write_file_fd, int file_size);
 
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name);
 

@@ -7,13 +7,12 @@
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name)
 {
     node_t* tmp = head;
+    
     char *tmp_str = malloc(sizeof(char)*9);
+    
     char *tmp_str_tim = malloc(sizeof(char)*12);
     //struct passwd *pwd;
     //uid_t  uid=0;
-
-  
-
 
     while (tmp != NULL)
     {

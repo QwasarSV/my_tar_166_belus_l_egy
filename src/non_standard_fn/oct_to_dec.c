@@ -3,7 +3,7 @@
 int my_iterative_pow(int value, int power)
 {
     int index = 0;
-    if (value == 0) 
+    if (power == 0) 
     {
         return 1;
     }
@@ -23,7 +23,7 @@ int oct_to_dec(int value)
 {
 
     int dec = 0;
-    int base =1;
+    int base = 1;
     int temp = value;
 
     while (temp)

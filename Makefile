@@ -6,11 +6,11 @@ CC = gcc
 # -g
 # -Wall give verbose compiler warnings
 # -o0 do not optimize generated code
-# -Wall -Wextra -Werror 
+# -g3 -fsanitize=address -Wall -Wextra -Werror 
 # -std=c99 use the c99 standard language defintion
 # -Wextra enables extra warnings flag
 # -Werror make all warning into error
-CFLAGS = -g3 -fsanitize=address 
+CFLAGS =  -g3 -fsanitize=address 
 # this is a test
 
 # LDFLAGS sets flags for linker
@@ -30,8 +30,9 @@ TARGET = my_tar
 # above, this Makefile will build the one named TARGET and 
 # assume that it depend on all the named objects files. 
 #-g before $(SOURCES) for core dump inspection
+#$(CC) -g $(SOURCES) -o $@ -IC $^ $(CFLAGS) 
 $(TARGET) :
-	$(CC) -g $(SOURCES) -o $@ -IC $^ $(CFLAGS)   
+	$(CC) -g $(SOURCES) -o $@ -IC $^ $(CFLAGS)  
 
 #phony means not a real target, it doesn't build anything
 #the phony target clean is used to remove all compiled object files.

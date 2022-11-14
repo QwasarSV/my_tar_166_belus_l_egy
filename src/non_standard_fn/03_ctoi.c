@@ -15,9 +15,12 @@ int my_ctoi(char *string, size_t n)
     while (n--)
     {
         if ((string[n] < '0' || string[n]> '9') && string[n] != '-'){ //check for int or '-'
-            if(num){
+            if(num)
+            {
                 break;
-            } else {
+            }
+            else
+            {
                 continue;
             }
         }
