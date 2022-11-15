@@ -36,7 +36,7 @@ char my_is_type(struct stat st)
     case (S_IFIFO):
         return '6';
         //break;        
-    default:
+    //default:
     /*on error big bad*/
         //break;
     }
