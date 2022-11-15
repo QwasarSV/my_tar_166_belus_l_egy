@@ -4,34 +4,36 @@
 int write_to_archive(int fd, int archive_fd, ph_t* ph)
 {
     int size_block = 0, size_fd = 0, initial_size = 0, count_block = 0;
-    
     size_fd = my_ctoi(ph->size, my_strlen(ph->size));
     size_fd = oct_to_dec(size_fd);
-    
     size_block = define_block_size(size_fd);
 
     write(archive_fd, &(*ph), sizeof(ph_t));
-    
     char file_RnW_buffer[size_fd];
-    
     char buff[12] = {'\0'};
-    
+
     write(archive_fd, buff, 12);
 
     while ((initial_size = read(fd, file_RnW_buffer, size_block)))
     {
-        write(archive_fd, file_RnW_buffer, size_block);
+        write(archive_fd, file_RnW_buffer, initial_size);
         count_block += 1;
     }
 
-    padding_null(archive_fd, size_block);
+    padding_null(archive_fd, size_fd%512);
+
+    // if(count_block > 0) {
     count_block += 1;
-    
+    // }
+
     close(fd);
     return count_block;
 }
 
-
+    // printf("ph size :   %s\n", ph->size);
+    // printf("block_size: %i\n",size_block);
+    // printf("size_fd_dec:%i\n",size_fd);
+// 
 // {
 //     //(void)ph;
 //     int size_block = 0, size_fd = 0, initial_size = 0, count_block = 1;
@@ -40,7 +42,7 @@ int write_to_archive(int fd, int archive_fd, ph_t* ph)
 //     size_block = define_block_size(size_fd);
 
 //         printf("ph name : %s\n", ph->name);
-//         printf("ph size : %s\n", ph->size);
+//         ;
 //     write(write_archive_fd, &(*ph), sizeof(ph_t));
     
 //     char file_RnW_buffer[size_fd];

@@ -3,7 +3,7 @@
 
 void padding_null(int fd, int size) 
 {
-    char padding[512] = {'\0'};
+    char padding[SIZE] = {'\0'};
     write(fd, padding, SIZE - size);
 
     // if(size == 512) {

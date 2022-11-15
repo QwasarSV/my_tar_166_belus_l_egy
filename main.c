@@ -1,5 +1,4 @@
 #include "include/main_header.h"
-
 #include <stdio.h>
 // NOT FINAL WIP
 //mytar [OPTION]... [ -f archive.tar] [dir1] [dir2] [dir3]
@@ -17,14 +16,14 @@ int main(int argc, char** argv)
         flag_parser(argc, argv, VALID_ARG_TAR, getopt_ptr);
     }
     
-    if(getopt_ptr->bool_arr[1] == 1)
+    if (getopt_ptr->bool_arr[1] == 1)
     {
         m_head = get_info(m_head, head, index);
     }
 
     command_center(getopt_ptr, m_head);
 
-    if(getopt_ptr->bool_arr[1] == 1)
+    if (getopt_ptr->bool_arr[1] == 1)
     {
         print_and_free_llist(m_head, getopt_ptr);
     }
