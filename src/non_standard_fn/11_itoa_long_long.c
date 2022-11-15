@@ -25,4 +25,4 @@ char* itoa_long_long(long long value, char* result, int base)
 	my_revswap(ptr, ptr1, tmp_char);
 		
 	return result;
-	}
+}

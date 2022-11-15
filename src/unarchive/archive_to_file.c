@@ -3,26 +3,25 @@
 
 void archive_to_file(my_getopt_t *getopt_ptr)
 {
-    int fd = 0, write_fd = 0, write_file_fd = 0, index = 0, result = 0;
-    // char* tmp = malloc(sizeof(char)*2);
+    int archive_fd = 0, fd = 0, size_fd = 0;
     printf("nbrstr : %i\n", getopt_ptr->nbr_str);
     ph_t* ph;
     
-    fd = open(getopt_ptr->path_arr[index], O_RDONLY);
-    write_fd = open(getopt_ptr->path_arr[index], O_RDONLY);
+    archive_fd = open(getopt_ptr->path_arr[0], O_RDONLY);
     ph = malloc(sizeof(ph_t));
     
     do
     {
-        read_archive(write_fd, ph);
+        read_archive(archive_fd, ph);
         write(1, ph, 500); // test check;
-        write_file_fd = open(ph->name, O_RDWR | O_CREAT, 0644);
+        fd = open(ph->name, O_RDWR | O_CREAT, 0644);
+        size_fd = my_ctoi(ph->size, my_strlen(ph->size));
+        size_fd = oct_to_dec(size_fd);
     }
-    while (write_to_file(fd, write_fd, write_file_fd, oct_to_dec(my_ctoi(ph->size, my_strlen(ph->size)))) > 0); // NO !!!!!
+    while (write_to_file(archive_fd, fd, size_fd) > 0); // NO !!!!!
     
-    free(ph); 
-    close(fd);
-    close(write_fd);
+    free(ph);
+    close(archive_fd);
 }
 
 //while ((initial_size = read(write_fd, file_RnW_buffer, size_block)))

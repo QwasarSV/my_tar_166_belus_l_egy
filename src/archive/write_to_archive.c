@@ -3,31 +3,18 @@
 
 int write_to_archive(int fd, int write_fd, int write_archive_fd, ph_t* ph)
 {
-    (void)ph;
-    int size_block = 0, size_fd = 0, initial_size = 0, hold_size = 0, count_block = 1;
-    //char file_RDON_buffer[SIZE];
-    hold_size = oct_to_dec(my_ctoi(ph->size, my_strlen(ph->size)));
-    
-    // while ((size_block = read(fd, file_RDON_buffer, SIZE)))
-    // {
-    //     size_fd = size_fd + size_block;
-    // }
+    //(void)ph;
+    int size_block = 0, size_fd = 0, initial_size = 0, count_block = 1;
+    size_fd = oct_to_dec(my_ctoi(ph->size, my_strlen(ph->size)));
 
-    if (hold_size < 512)
-    {
-        size_block = hold_size; 
-    }
-    else
-    {
-        size_block = 512;
-    }
+    size_block = define_block_size(size_fd);
 
         printf("ph name : %s\n", ph->name);
         printf("ph size : %s\n", ph->size);
-        //printf("size fd :%i\n",size_fd);
-        //write_struct(write_archive_fd, ph);
     write(write_archive_fd, &(*ph), sizeof(ph_t));
-    char file_RnW_buffer[hold_size];
+    
+    char file_RnW_buffer[size_fd];
+    
     char buff[12] = {'\0'};
     
     write(write_archive_fd, buff, 12);

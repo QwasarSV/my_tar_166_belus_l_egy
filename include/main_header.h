@@ -92,6 +92,7 @@ typedef struct posix_header
 
 char my_is_type(struct stat st);
 void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
+int define_block_size(int size_fd);
 // myls core components
 int flag_parser(int argc, char **argv, char *valid_args, my_getopt_t *getopt_ptr);
     void count_path_array(int argc, char** argv, my_getopt_t *getopt_ptr);
@@ -144,7 +145,7 @@ int write_to_archive(int fd, int write_fd, int write_archive_fd, ph_t* ph);
 void read_archive(int fd, ph_t* ph);
 void test_archive(int fd, ph_t* ph);
 
-int write_to_file(int fd, int write_fd, int write_file_fd, int file_size);
+int write_to_file(int write_fd, int write_file_fd, int file_size);
 
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name);
 

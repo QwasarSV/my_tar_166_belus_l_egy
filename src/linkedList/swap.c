@@ -3,10 +3,17 @@
 node_t* swap(node_t* head, int node_index1, int node_index2)
 {
     node_t* curr1 = head, * prev1 = NULL, * curr2 = head, * prev2 = NULL, * tmp = NULL;
+    
 
-    if (node_index1 == node_index2 || node_index2 == head->value)
+    if (node_index1 == node_index2)
     {
         return head;
+    }
+
+    if (node_index2 == head->value)
+    {   
+        node_index2 = node_index1;
+        node_index1 = head->value;
     }
 
     while (curr2 != NULL &&  curr2->value != node_index2)
