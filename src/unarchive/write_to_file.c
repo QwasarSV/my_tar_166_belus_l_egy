@@ -26,12 +26,6 @@ int write_to_file(int archive_fd, int fd, int file_size)
 }
 
 
-
-
-
-
-
-
     // while ((initial_size = read(fd, file_RnW_buffer, size_block)))
     // {
     //     write(archive_fd, file_RnW_buffer, size_block);

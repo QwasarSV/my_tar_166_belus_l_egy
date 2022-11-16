@@ -11,8 +11,8 @@ int write_to_archive(int fd, int archive_fd, ph_t* ph)
     write(archive_fd, &(*ph), sizeof(ph_t));
     char file_RnW_buffer[size_fd];
     char buff[12] = {'\0'};
-
     write(archive_fd, buff, 12);
+    count_block += 1;
 
     while ((initial_size = read(fd, file_RnW_buffer, size_block)))
     {
@@ -20,11 +20,10 @@ int write_to_archive(int fd, int archive_fd, ph_t* ph)
         count_block += 1;
     }
 
-    padding_null(archive_fd, size_fd%512);
-
-    // if(count_block > 0) {
-    count_block += 1;
-    // }
+    if (size_fd%SIZE != 0) // temp check to remove
+    {
+        padding_null(archive_fd, size_fd%512);
+    }
 
     close(fd);
     return count_block;
