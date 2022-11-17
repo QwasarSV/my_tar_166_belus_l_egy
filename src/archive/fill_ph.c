@@ -59,5 +59,8 @@ ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name)
         }
         tmp = tmp->next;
     }
+    free(tmp_str);
+    free(tmp_str_tim);
+
     return ph;
 }

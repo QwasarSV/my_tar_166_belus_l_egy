@@ -36,7 +36,7 @@ int my_getopt(char** argv, char* valid_args, my_getopt_t* getopt_ptr)
         if (argv[getopt_ptr->index][getopt_ptr->pos] != '\0' && argv[getopt_ptr->index][getopt_ptr->pos] == '-')
         {
             getopt_ptr->pos += 1;
-            return '-';
+            return 0;
         }
         else
         {

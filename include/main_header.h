@@ -40,7 +40,8 @@ typedef struct s_my_getopt
     int path_pos;
     char** path_arr;
     int* file_size; //dummy
-    char home[PATH_MAX]; 
+    char home[PATH_MAX];
+    long long int oflag; 
 } my_getopt_t;
 #endif
 
@@ -140,12 +141,17 @@ node_t* swap(node_t* head, int node_index1, int node_index2);
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head);
 void get_archive_info(my_getopt_t *getopt_ptr);
 void archive_to_file(my_getopt_t *getopt_ptr);
+void end_block(int fd, int block_count);
 
 int write_to_archive(int fd, int write_archive_fd, ph_t* ph);
-void read_archive(int fd, ph_t* ph);
+ph_t* read_archive(int fd, ph_t* ph);
 void test_archive(int fd, ph_t* ph);
 
 int write_to_file(int write_fd, int write_file_fd, int file_size);
+
+
+int set_fd_pos(int archive_fd, my_getopt_t* getopt_ptr);
+int read_to_pos(int archive_fd, int size_read);
 
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name);
 

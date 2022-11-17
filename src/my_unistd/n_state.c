@@ -5,7 +5,7 @@ void n_state(char opt, my_getopt_t *getopt_ptr, char** argv)
     switch (opt)
     {
     case 'f':
-        getopt_ptr->bool_arr[0] = true;
+        getopt_ptr->bool_arr[0] = true;       
     break;
     case 'c':
         getopt_ptr->bool_arr[1] = true;

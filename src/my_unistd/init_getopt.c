@@ -8,4 +8,5 @@ void init_getopt(my_getopt_t* getopt_ptr, char* valid_args)
     getopt_ptr->bool_arr[0] = 1;
     getopt_ptr->nbr_str = 0;
     getcwd(getopt_ptr->home, sizeof(getopt_ptr->home));
+    //getopt_ptr->oflag = malloc(sizeof(int));
 }
