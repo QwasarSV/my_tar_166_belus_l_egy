@@ -11,11 +11,9 @@ void end_block(int fd, int block_count)
     }
 
     count = count * 20 - block_count;
-    printf("count end :%i\n", count);
     while (index < count)
     {
         padding_null(fd, 0);
         index +=1;
-        printf("index :%i\n", index);
     }
 }

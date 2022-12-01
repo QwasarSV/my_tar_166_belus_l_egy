@@ -10,3 +10,4 @@ void init_getopt(my_getopt_t* getopt_ptr, char* valid_args)
     getcwd(getopt_ptr->home, sizeof(getopt_ptr->home));
     //getopt_ptr->oflag = malloc(sizeof(int));
 }
+

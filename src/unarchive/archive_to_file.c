@@ -7,7 +7,7 @@ void archive_to_file(my_getopt_t *getopt_ptr)
     ph_t* ph;
 
     archive_fd = open(getopt_ptr->path_arr[0], O_RDONLY);
-   
+
     do
     {
         ph = malloc(sizeof(ph_t));
@@ -19,6 +19,5 @@ void archive_to_file(my_getopt_t *getopt_ptr)
         free(ph);
     }
     while (write_to_file(archive_fd, fd, size_fd) > 0); // NO !!!!!
-
     close(archive_fd);
 }

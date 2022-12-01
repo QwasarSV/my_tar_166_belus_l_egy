@@ -21,7 +21,6 @@ CFLAGS =  -g3 -fsanitize=address
 
 SOURCES = *.c src/*/*.c
 
-
 OBJECTS = $(SOURCES:.c)
 TARGET = my_tar
 
@@ -32,7 +31,7 @@ TARGET = my_tar
 #-g before $(SOURCES) for core dump inspection
 #$(CC) -g $(SOURCES) -o $@ -IC $^ $(CFLAGS) 
 $(TARGET) :
-	$(CC) -g $(SOURCES) -o $@ -IC $^ $(CFLAGS)  
+	$(CC) $(SOURCES) -o $@ $^ $(CFLAGS)  
 
 #phony means not a real target, it doesn't build anything
 #the phony target clean is used to remove all compiled object files.

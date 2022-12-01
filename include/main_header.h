@@ -41,9 +41,27 @@ typedef struct s_my_getopt
     char** path_arr;
     int* file_size; //dummy
     char home[PATH_MAX];
-    long long int oflag; 
+    long long int oflag;  // NEED TO SETUP NEW STRUCT TYPE UPON REFACTORING
+    bool* state;
 } my_getopt_t;
 #endif
+
+
+
+#ifndef STRUCT_MY_TAR_STRUCT_U
+#define STRUCT_MY_TAR_STRUCT_U
+
+typedef struct s_my_tar_struct_u
+{
+    int nbr_str;
+    int* tar_map;
+    char** str_arr;
+    char* int_arr;
+    char** mtim_arr;
+    int index;
+} my_tar_struct;
+#endif
+
 
 #ifndef STRUCT_MY_P_HEADER
 #define STRUCT_MY_P_HEADER
@@ -91,9 +109,12 @@ typedef struct posix_header
 
 
 
+
 char my_is_type(struct stat st);
 void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
 int define_block_size(int size_fd);
+
+
 // myls core components
 int flag_parser(int argc, char **argv, char *valid_args, my_getopt_t *getopt_ptr);
     void count_path_array(int argc, char** argv, my_getopt_t *getopt_ptr);
@@ -120,22 +141,24 @@ node_t* get_info(node_t* m_head, node_t* head, int index);
 char* my_strchr(char* str1, char ch);
 int my_strcmp(char* str1, char* str2);
 char* my_strcpy(char* str_dest, char* str_src);
+char* my_strncpy(char* str1, char* str2, int n);
 int my_strlen(char *str);
 void my_bzero(void *generic_ptr, size_t n);
 char* my_strcat(char* str_dest, char* str_src);
+char* my_strstr(char* str, char* substr);
 // my node library
 
 node_t *create_new_mother_node(int value, node_t *head);
 node_t *create_new_node(int value, char *path);
 node_t *insert_at_head(node_t **head, node_t *node_to_insert);
 void reverse_node_order(node_t **head);
-void free_node(node_t *head);
+void free_node(node_t* head);
 void recur_free_node(node_t *head);
 void test_print_list(node_t *head, bool* flags);
 int node_count(node_t *head);
 int recur_node_count(node_t *head, int count);
 node_t* swap(node_t* head, int node_index1, int node_index2);
-
+node_t* free_single_node(node_t* head);
 
 
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head);
@@ -145,14 +168,15 @@ void end_block(int fd, int block_count);
 
 int write_to_archive(int fd, int write_archive_fd, ph_t* ph);
 ph_t* read_archive(int fd, ph_t* ph);
-void test_archive(int fd, ph_t* ph);
-
+void write_header(int fd, ph_t* ph);
 int write_to_file(int write_fd, int write_file_fd, int file_size);
 
 
 int set_fd_pos(int archive_fd, my_getopt_t* getopt_ptr);
-int read_to_pos(int archive_fd, int size_read);
+//int read_to_pos(int archive_fd, int size_read);
+int read_to_pos(int archive_fd, int size_read, my_getopt_t* getopt_ptr, char* ph_name) ;
 
+int check_u_state(char* filename_ph, my_getopt_t* getopt_ptr,char* archive_buff, int size_fd);
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name);
 
 
@@ -172,5 +196,23 @@ char* itoa_long_long(long long value, char* result, int base);
 
 int my_iterative_pow(int value, int power);
 int my_ctoi(char *string, size_t n);
+
+//void map_tar(node_t* head, my_getopt_t* getopt_ptr);
+void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
+
+void clean_llist(node_t* m_head, my_getopt_t *getopt_ptr);
+node_t* select_node(node_t* head, my_getopt_t* getopt_ptr);
+
+//uflag specific
+void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head);
+void m_node_iteration(node_t* m_head, my_getopt_t *getopt_ptr);
+int get_archive_size(node_t* head, my_getopt_t* getopt_ptr);
+int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s);
+void init_tar_map(my_tar_struct* tar_s, int archive_blck_size);
+int read_to_pos_u(int archive_fd, int size_read, my_getopt_t* getopt_ptr, char* ph_name, my_tar_struct* tar_s);
+int map_archive(int archive_fd, int size_read, my_getopt_t* getopt_ptr, char* ph_name, my_tar_struct* tar_s);
+void store_filenames(my_tar_struct* tar_s, char* filename, char* mtim, int index);
+void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
+int check_mtime(ph_t* ph, my_tar_struct* tar_s, my_getopt_t* getopt_ptr);
 
 #endif
