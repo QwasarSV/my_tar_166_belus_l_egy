@@ -16,11 +16,13 @@ void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head)
     while (index < getopt_ptr->nbr_str -1) // evolution: need to be based on valid nodes or valid strings == need security check
     {
         index++;
-        
         ph = malloc(sizeof(ph_t));
         ph = fill_ph(m_head->daughter_head, ph, getopt_ptr->path_arr[index]);
-        
-        getopt_ptr->state[index] = check_mtime(ph, tar_s, getopt_ptr);
+        if(check_mtime(ph, tar_s, getopt_ptr) == true)
+        {
+            getopt_ptr->state[index] = 1;
+        }
+
         printf("state but main fn : %i\n",getopt_ptr->state[index]);
         if (getopt_ptr->state[index] == true )
         {

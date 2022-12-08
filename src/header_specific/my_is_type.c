@@ -19,22 +19,22 @@ char my_is_type(struct stat st)
     switch (st.st_mode & S_IFMT)
     {
     case (S_IFREG):
-        return '0';
+        return REG_T;
         //break;
     case (S_IFLNK):
-        return '2';
+        return SYM_T;
         //break;
     case (S_IFCHR):
-        return '3';
+        return CHR_T;
        //break;
     case (S_IFBLK):
-        return '4';
+        return BLK_T;
         //break;
     case (S_IFDIR):
-        return '5';
+        return DIR_T;
         //break;
     case (S_IFIFO):
-        return '6';
+        return FIFO_T;
         //break;        
     //default:
     /*on error big bad*/

@@ -9,8 +9,13 @@ char* unsigned_itoa(unsigned long int value, char* result, int base) {
 	if (base < 2 || base > 36) { *result = '\0'; return result; }
 
 	char* ptr = result, *ptr1 = result, tmp_char = 0;
-	unsigned long int tmp_value;
+	unsigned int tmp_value;
 	
+	if(value < 0)
+	{
+		value *= -1;
+	}
+
 	// Translating number to string with base and storing it :
 	do {
 		tmp_value = value;

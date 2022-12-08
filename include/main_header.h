@@ -11,6 +11,7 @@
 #include <pwd.h>
 #include <grp.h>
 
+#include <limits.h> // uint
 
 #ifndef STRUCT_NODE
 #define STRUCT_NODE
@@ -59,6 +60,7 @@ typedef struct s_my_tar_struct_u
     char* int_arr;
     char** mtim_arr;
     int index;
+    int tar_state;
 } my_tar_struct;
 #endif
 
@@ -100,6 +102,14 @@ typedef struct posix_header
     '?'    S_IFSOCK   0140000   socket
 */
 
+#define REG_T '0'
+#define LNK_T '1'
+#define SYM_T '2'
+#define CHR_T '3'
+#define BLK_T '4'
+#define DIR_T '5'
+#define FIFO_T '6'
+
 
 #define BADCHAR (int)'?'
 #define BADARG (int)':'
@@ -111,6 +121,8 @@ typedef struct posix_header
 
 
 char my_is_type(struct stat st);
+
+unsigned long int wrap_arround(unsigned int i);
 void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
 int define_block_size(int size_fd);
 
@@ -122,10 +134,9 @@ int flag_parser(int argc, char **argv, char *valid_args, my_getopt_t *getopt_ptr
     int my_getopt(char **argv, char *optstr, my_getopt_t *getopt_ptr);
     void n_state(char opt, my_getopt_t *getopt_ptr, char** argv);
 
+
 void sort_str_arr(my_getopt_t *getopt_ptr);
-
 node_t* create_llist(struct dirent * pDirent, DIR *pDir, node_t *head, node_t *tmp_node);
-
 void sort_asc(node_t* m_node);
 void lexi_sort(node_t* m_node);
 void print_and_free_llist(node_t* m_head, my_getopt_t *getopt_ptr);
@@ -146,8 +157,8 @@ int my_strlen(char *str);
 void my_bzero(void *generic_ptr, size_t n);
 char* my_strcat(char* str_dest, char* str_src);
 char* my_strstr(char* str, char* substr);
-// my node library
 
+// my node library
 node_t *create_new_mother_node(int value, node_t *head);
 node_t *create_new_node(int value, char *path);
 node_t *insert_at_head(node_t **head, node_t *node_to_insert);
@@ -159,60 +170,81 @@ int node_count(node_t *head);
 int recur_node_count(node_t *head, int count);
 node_t* swap(node_t* head, int node_index1, int node_index2);
 node_t* free_single_node(node_t* head);
+node_t* select_node(node_t* head, my_getopt_t* getopt_ptr);
 
 
+//archive fn
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head);
 void get_archive_info(my_getopt_t *getopt_ptr);
 void archive_to_file(my_getopt_t *getopt_ptr);
-void end_block(int fd, int block_count);
-
+int end_block(int fd, int block_count);
 int write_to_archive(int fd, int write_archive_fd, ph_t* ph);
-ph_t* read_archive(int fd, ph_t* ph);
-void write_header(int fd, ph_t* ph);
+//ph_t* read_header(int fd, ph_t* ph);
+int read_header(int fd, ph_t* ph);
+//void write_header(int fd, ph_t* ph);
 int write_to_file(int write_fd, int write_file_fd, int file_size);
-
-
-int set_fd_pos(int archive_fd, my_getopt_t* getopt_ptr);
-//int read_to_pos(int archive_fd, int size_read);
-int read_to_pos(int archive_fd, int size_read, my_getopt_t* getopt_ptr, char* ph_name) ;
-
-int check_u_state(char* filename_ph, my_getopt_t* getopt_ptr,char* archive_buff, int size_fd);
 ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name);
+int padding_null(int fd, int size);
+
+//header specific
+int header_size (ph_t * header);
+void set_header_field(void *generic_ptr, char ch, size_t size);
+void set_header(ph_t* ph, node_t* node);
+void field_update(char* str, int value, size_t size);
+int inter_size(char* str, size_t len);
+// r fn
+int set_fd_pos(int archive_fd, my_getopt_t* getopt_ptr);
+int read_to_pos(int archive_fd, int size_read, my_getopt_t* getopt_ptr) ;
+
+//void write_struct(int fd, ph_t* ph);
 
 
-void padding_null(int fd, int size);
-
-void write_struct(int fd, ph_t* ph);
-
+// itoa/ctoi
 void my_revswap(char *ptr, char*ptr1, char tmp_char);
-
 char* their_itoa(int value, char* result, int base);
 char* unsigned_itoa(unsigned long int value, char* result, int base);
-
 //long long oct_to_dec(int value);
 int oct_to_dec(int value);
 //long long oct_to_dec(long long int value);
 char* itoa_long_long(long long value, char* result, int base);
-
 int my_iterative_pow(int value, int power);
 int my_ctoi(char *string, size_t n);
 
 //void map_tar(node_t* head, my_getopt_t* getopt_ptr);
 void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
-
 void clean_llist(node_t* m_head, my_getopt_t *getopt_ptr);
-node_t* select_node(node_t* head, my_getopt_t* getopt_ptr);
+
 
 //uflag specific
 void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head);
 void m_node_iteration(node_t* m_head, my_getopt_t *getopt_ptr);
 int get_archive_size(node_t* head, my_getopt_t* getopt_ptr);
 int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s);
-void init_tar_map(my_tar_struct* tar_s, int archive_blck_size);
-int read_to_pos_u(int archive_fd, int size_read, my_getopt_t* getopt_ptr, char* ph_name, my_tar_struct* tar_s);
-int map_archive(int archive_fd, int size_read, my_getopt_t* getopt_ptr, char* ph_name, my_tar_struct* tar_s);
-void store_filenames(my_tar_struct* tar_s, char* filename, char* mtim, int index);
+//int read_to_pos_u(int archive_fd, int size_read, my_tar_struct* tar_s);
 void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
 int check_mtime(ph_t* ph, my_tar_struct* tar_s, my_getopt_t* getopt_ptr);
+
+
+void init_tar_map(my_tar_struct* tar_s, int archive_blck_size);
+int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s);
+void tar_map_file(int byte_count, my_tar_struct* tar_s);
+void store_filenames(my_tar_struct* tar_s, char* filename, char* mtim, int index);
+//int check_u_state(char* filename_ph, my_getopt_t* getopt_ptr,char* archive_buff, int size_fd);
+
+//read fn
+//int read_chunk(int fd, char* buff, int block_size, int size_file);
+int read_chunk02(int fd, char* buff, int block_size, int file_size);
+int read_chunk03(int fd, char* buff, int block_size, int size_file, my_tar_struct* tar_s);
+
+void read_archive(int archive_fd, my_getopt_t* getopt_ptr);
+int read_archive02(int fd, my_getopt_t* getopt_ptr);
+int read_archive03(int fd, my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
+
+int write_chunk(int fd, int archive_fd, char* buff, int block_size);
+int write_chunk02(int fd, int archive_fd, char* buff, int block_size, int file_size);
+int write_header(int fd, char* buff, ph_t* ph);
+
+unsigned int base_converter(unsigned int val, int base);
+int sum_ascii(char* str);
 
 #endif

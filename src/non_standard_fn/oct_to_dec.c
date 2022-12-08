@@ -1,5 +1,5 @@
 #include "../../include/main_header.h"
-
+#include <stdio.h>
 int my_iterative_pow(int value, int power)
 {
     int index = 0;
@@ -69,4 +69,24 @@ return dec;
     //     value /= 10;
     // }
     // return result;
+}
+
+unsigned int base_converter(unsigned int val, int base)
+{
+    int index = 0;
+    int tmp = 0;
+    unsigned int result = 0;
+    int mult = 1;
+    while (val)
+    {
+        tmp = val % base;
+        // printf("base tmp: %i \n",tmp);
+        val /= base;
+        // printf("base  val: %i \n",val);
+        result += tmp*mult;
+        // printf("base  result: %i \n",result);
+        mult *= 10;
+        index += 1;
+    }
+    return result;
 }

@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 
     int index = 0;
     node_t *m_head = 0, *head = 0;
-
+    
     init_getopt(getopt_ptr, VALID_ARG_TAR);
     if (argc > 1)
     {

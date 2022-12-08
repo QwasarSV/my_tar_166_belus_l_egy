@@ -1,10 +1,10 @@
 #include "../../include/main_header.h"
 #include <stdio.h>
 
-ph_t* read_archive(int fd, ph_t* ph)
+int read_header(int fd, ph_t* ph)
 {   
+    char burn[12] = {'\0'};
     read(fd, ph, sizeof(ph_t));
-    char burn[12];
     read(fd, burn, 12);
-    return ph;
+    return SIZE;
 }

@@ -3,14 +3,13 @@
 
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head) 
 {
-    int fd = 0, archive_fd = 0, index = 0, block_count = 0;
+    int fd = 0, archive_fd = 0, index = 0, byte_count = 0, block_count = 0;
     ph_t* ph;
 
     archive_fd = open(getopt_ptr->path_arr[index], getopt_ptr->oflag , 0644);
 
     if (getopt_ptr->bool_arr[2] == true || getopt_ptr->bool_arr[4] == true)
     {
-        
         block_count += set_fd_pos(archive_fd , getopt_ptr);
     }
 
@@ -21,12 +20,14 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
         {
             ph = malloc(sizeof(ph_t));
             ph = fill_ph(m_head->daughter_head, ph, getopt_ptr->path_arr[index]);
+            printf("ph->typeflag %i \n",ph->typeflag);
             fd = open(getopt_ptr->path_arr[index], O_RDONLY);
-            block_count += write_to_archive(fd, archive_fd, ph);
+            byte_count += write_to_archive(fd, archive_fd, ph);
             free(ph);
         }
     }
-
+    printf("byte_count : %i \n", byte_count);
+    block_count = byte_count / SIZE;
     printf("countblock : %i \n", block_count);
 
     end_block(archive_fd, block_count);
