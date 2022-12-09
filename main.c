@@ -5,6 +5,13 @@
 
 int main(int argc, char** argv)
 {
+    int len = my_strlen(argv[2]) - 4; 
+    
+    if (my_strcmp(&argv[2][len], ".tar") != 0)
+    {
+        return 0;
+    }
+
     my_getopt_t* getopt_ptr = malloc(sizeof(my_getopt_t));
 
     int index = 0;
@@ -29,5 +36,5 @@ int main(int argc, char** argv)
     }
 
     free_opt(argc, argv, getopt_ptr);
-    return 0;
+    return 1;
 }

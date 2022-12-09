@@ -8,7 +8,7 @@ int set_fd_pos(int archive_fd, my_getopt_t *getopt_ptr) // similar function to "
     int tmp_fd = open(getopt_ptr->path_arr[0], getopt_ptr->oflag , 0644);
     byte_count += read_archive02(tmp_fd);
     close(tmp_fd);
-    printf("byte_count main %i \n",byte_count);
+    //printf("byte_count main %i \n",byte_count);
 
     read_to_pos(archive_fd, byte_count - BLOCKSIZE);
     byte_count -= 512;

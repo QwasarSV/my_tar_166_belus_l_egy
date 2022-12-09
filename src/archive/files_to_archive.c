@@ -26,9 +26,9 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
         }
     }
 
-    printf("byte_count : %i \n", byte_count);
+    //printf("byte_count : %i \n", byte_count);
     block_count += byte_count / BLOCKSIZE;
-    printf("countblock : %i \n", block_count);
+    //printf("countblock : %i \n", block_count);
 
     end_block(archive_fd, block_count);
 
