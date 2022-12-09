@@ -189,7 +189,7 @@ int padding_null(int fd, int size);
 //header specific
 int header_size (ph_t * header);
 void set_header_field(void *generic_ptr, char ch, size_t size);
-void set_header(ph_t* ph, node_t* node);
+void set_header(ph_t* ph);
 void field_update(char* str, int value, size_t size);
 int inter_size(char* str, size_t len);
 // r fn
@@ -222,7 +222,7 @@ int get_archive_size(node_t* head, my_getopt_t* getopt_ptr);
 int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s);
 //int read_to_pos_u(int archive_fd, int size_read, my_tar_struct* tar_s);
 void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
-int check_mtime(ph_t* ph, my_tar_struct* tar_s, my_getopt_t* getopt_ptr);
+int check_mtime(ph_t* ph, my_tar_struct* tar_s);
 
 
 void init_tar_map(my_tar_struct* tar_s, int archive_blck_size);
@@ -238,12 +238,12 @@ int read_chunk02(int fd, char* buff, int block_size, int file_size);
 int read_chunk03(int fd, char* buff, int block_size, int size_file, my_tar_struct* tar_s);
 
 void read_archive(int archive_fd, my_getopt_t* getopt_ptr);
-int read_archive02(int fd, my_getopt_t* getopt_ptr);
-int read_archive03(int fd, my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
+int read_archive02(int fd);
+int read_archive03(int fd, my_tar_struct* tar_s);
 
 int write_chunk(int fd, int archive_fd, char* buff, int block_size);
 int write_chunk02(int fd, int archive_fd, char* buff, int block_size, int file_size);
-int write_header(int fd, char* buff, ph_t* ph);
+int write_header(int fd, ph_t* ph);
 
 unsigned int base_converter(unsigned int val, int base);
 int sum_ascii(char* str);

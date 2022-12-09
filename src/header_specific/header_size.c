@@ -2,7 +2,8 @@
 
 int header_size (ph_t * header)
 {
-    int size = 0, index = 0;
+    long unsigned int index = 0;
+    int size = 0;
 
     size += inter_size(header->name, sizeof(header->name));
     size += inter_size(header->mode, sizeof(header->mode));

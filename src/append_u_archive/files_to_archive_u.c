@@ -18,7 +18,7 @@ void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head)
         index++;
         ph = malloc(sizeof(ph_t));
         ph = fill_ph(m_head->daughter_head, ph, getopt_ptr->path_arr[index]);
-        if(check_mtime(ph, tar_s, getopt_ptr) == true)
+        if(check_mtime(ph, tar_s) == true)
         {
             getopt_ptr->state[index] = 1;
         }

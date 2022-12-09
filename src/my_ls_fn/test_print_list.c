@@ -4,8 +4,9 @@
 
 void test_print_list(node_t* head, bool* flags)
 {
+    (void)flags;
     node_t* tmp = head;
-    int state = false;
+    //int state = false;
 
     while (tmp != NULL)
     {

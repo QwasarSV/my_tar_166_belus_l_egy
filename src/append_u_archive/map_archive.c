@@ -3,7 +3,7 @@
 
 int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s) //potential unused arguments need to make a new function; 
 {
-    int byte_count = 0, initial_size = 0, block_size = BLOCKSIZE;
+    int byte_count = 0, block_size = BLOCKSIZE;
     char buff[size_read];
     char burn[BLOCKSIZE - (size_read % BLOCKSIZE)];
 

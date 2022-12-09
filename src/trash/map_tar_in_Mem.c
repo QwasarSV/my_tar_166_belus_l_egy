@@ -6,7 +6,7 @@
 
 // ALTERNATE METHOD(ABANDONED) : MEM REQUIREMENT TOO HIGH OR IS REDONDANT TO CURRENT CODE
 
-void map_tar(node_t* head, my_getopt_t* getopt_ptr)
+void map_tar(node_t* head)
 {
     node_t* tmp = head;
 

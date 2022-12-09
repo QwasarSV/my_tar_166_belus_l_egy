@@ -3,7 +3,7 @@
 
 int write_to_file(int archive_fd, int fd, int file_size)
 {
-    int byte_count = 0, initial_size = 0, block_size = 0;
+    int byte_count = 0, block_size = 0;
     char burn02[BLOCKSIZE - (file_size % BLOCKSIZE)];
     char buff[file_size];
 

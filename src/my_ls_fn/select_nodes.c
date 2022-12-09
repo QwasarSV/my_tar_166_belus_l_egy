@@ -4,8 +4,8 @@
 
 node_t* select_node(node_t* head, my_getopt_t* getopt_ptr)
 {
-    node_t* tmp = head, * next = NULL;
-    int index = 0 ,n =0;
+    node_t* tmp = head;
+    int index = 0;
     bool state;
 
     while (tmp != NULL)

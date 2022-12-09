@@ -1,6 +1,6 @@
 #include "../../include/main_header.h"
 
-int read_archive02(int fd, my_getopt_t* getopt_ptr)
+int read_archive02(int fd)
 {
     int byte_count = 0, size_file = 0, result = 0;
     ph_t* ph;

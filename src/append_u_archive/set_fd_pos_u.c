@@ -3,8 +3,7 @@
 
 int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s) // similar function to "archive to file" == need to change accepted args or function structure so it can be more polyvalent.
 {
-    int size_fd = 0, block_count = 0, inter_byte_count = 0, byte_count = 0;
-    ph_t* ph;
+    int size_fd = 0, block_count = 0, byte_count = 0;
 
     int tmp_fd = open(getopt_ptr->path_arr[0], getopt_ptr->oflag , 0644);
 //------------------------
@@ -13,7 +12,7 @@ int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar
     archive_blck_size = get_archive_size(m_head, getopt_ptr);
     init_tar_map(tar_s, archive_blck_size);
 //------------------------
-    byte_count = read_archive03(tmp_fd, getopt_ptr, tar_s);
+    byte_count = read_archive03(tmp_fd, tar_s);
 
     tar_s->str_arr = malloc(sizeof(char*)*tar_s->nbr_str);
     tar_s->mtim_arr = malloc(sizeof(char*)*tar_s->nbr_str); 
@@ -21,7 +20,6 @@ int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar
 
     map_archive(archive_fd, byte_count, tar_s);
     check_file_arr(getopt_ptr, tar_s);
-    int index = 0;
 
     if (size_fd % BLOCKSIZE == 0)
     {

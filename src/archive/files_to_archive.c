@@ -20,15 +20,15 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
         {
             ph = malloc(sizeof(ph_t));
             ph = fill_ph(m_head->daughter_head, ph, getopt_ptr->path_arr[index]);
-        //    printf("ph->typeflag %i \n",ph->typeflag);
             fd = open(getopt_ptr->path_arr[index], O_RDONLY);
             byte_count += write_to_archive(fd, archive_fd, ph);
             free(ph);
         }
     }
-   // printf("byte_count : %i \n", byte_count);
-    block_count = byte_count / BLOCKSIZE;
-   // printf("countblock : %i \n", block_count);
+
+    printf("byte_count : %i \n", byte_count);
+    block_count += byte_count / BLOCKSIZE;
+    printf("countblock : %i \n", block_count);
 
     end_block(archive_fd, block_count);
 

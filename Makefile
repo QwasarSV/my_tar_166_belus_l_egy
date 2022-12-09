@@ -10,7 +10,7 @@ CC = gcc
 # -std=c99 use the c99 standard language defintion
 # -Wextra enables extra warnings flag
 # -Werror make all warning into error
-CFLAGS =  -g3 -fsanitize=address 
+CFLAGS =  -g3 -fsanitize=address -Wall -Wextra -Werror 
 # this is a test
 
 # LDFLAGS sets flags for linker

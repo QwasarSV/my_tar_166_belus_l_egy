@@ -1,6 +1,6 @@
 #include "../../include/main_header.h"
 
-void set_header(ph_t* ph, node_t* node)
+void set_header(ph_t* ph)
 {
     my_bzero(ph->name, sizeof(ph->name));
     my_bzero(ph->linkname, sizeof(ph->linkname));

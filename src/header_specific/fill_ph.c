@@ -12,7 +12,7 @@ ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name)
     {
         if (my_strcmp(file_name, tmp->path_name) == 0)
         {
-            set_header(ph, tmp);
+            set_header(ph);
             my_strcpy(ph->name, tmp->path_name);
             field_update(ph->mode, tmp->st.st_mode%ten_k_oct, sizeof(ph->mode));
             field_update(ph->uid, tmp->st.st_uid, sizeof(ph->uid));

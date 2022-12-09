@@ -3,13 +3,12 @@
 
 int set_fd_pos(int archive_fd, my_getopt_t *getopt_ptr) // similar function to "archive to file" == need to change accepted args or function structure so it can be more polyvalent.
 {
-    int block_count = 0, inter_byte_count = 0, byte_count = 0;
-    ph_t* ph;
+    int block_count = 0, byte_count = 0;
 
     int tmp_fd = open(getopt_ptr->path_arr[0], getopt_ptr->oflag , 0644);
-    byte_count += read_archive02(tmp_fd, getopt_ptr);
+    byte_count += read_archive02(tmp_fd);
     close(tmp_fd);
-    //printf("byte_count main %i \n",byte_count);
+    printf("byte_count main %i \n",byte_count);
 
     read_to_pos(archive_fd, byte_count - BLOCKSIZE);
     byte_count -= 512;

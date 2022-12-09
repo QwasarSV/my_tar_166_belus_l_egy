@@ -1,6 +1,6 @@
 #include "../../include/main_header.h"
 
-int read_archive03(int fd, my_getopt_t* getopt_ptr, my_tar_struct* tar_s)
+int read_archive03(int fd, my_tar_struct* tar_s)
 {
     int byte_count = 0, file_size = 0;
     ph_t* ph;

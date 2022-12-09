@@ -1,7 +1,7 @@
 #include "../../include/main_header.h"
 //#include <stdio.h>
 
-int check_mtime(ph_t* ph, my_tar_struct* tar_s, my_getopt_t* getopt_ptr)
+int check_mtime(ph_t* ph, my_tar_struct* tar_s)
 {
     int index = 0;
     while (index < tar_s->nbr_str -1)

@@ -8,7 +8,7 @@ void set_header_field(void *generic_ptr, char ch, size_t size)
     char *arr = generic_ptr;  
     int index = 0;
 
-    while ( index < size -1 )
+    while ( index < (int)size -1 )
     {
         arr[index] = ch;
         index += 1;
