@@ -16,8 +16,7 @@ node_t* select_node(node_t* head, my_getopt_t* getopt_ptr)
         {
             //printf("pathnameNODE sw: %s - pathnameGETOPT sw: %s\n",tmp->path_name, getopt_ptr->path_arr[index]);
             if (my_strcmp(tmp->path_name, getopt_ptr->path_arr[index]) == 0)
-            {
-                
+            {     
                 state = false;
             }
         

@@ -1,5 +1,5 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
+
 int get_archive_size(node_t* m_head, my_getopt_t* getopt_ptr)
 {
     node_t* tmp_m = m_head, * tmp_d = NULL;
@@ -11,7 +11,7 @@ int get_archive_size(node_t* m_head, my_getopt_t* getopt_ptr)
         {
             if (my_strcmp(tmp_d->path_name, getopt_ptr->path_arr[0]) == 0)
             {
-                block_size = tmp_d->st.st_size/SIZE;
+                block_size = tmp_d->st.st_size/BLOCKSIZE;
                 return block_size;
             }
             tmp_d = tmp_d->next;

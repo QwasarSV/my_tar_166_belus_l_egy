@@ -3,9 +3,9 @@
 
 int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s) //potential unused arguments need to make a new function; 
 {
-    int byte_count = 0, initial_size = 0, block_size = SIZE;
+    int byte_count = 0, initial_size = 0, block_size = BLOCKSIZE;
     char buff[size_read];
-    char burn[SIZE - (size_read%SIZE)];
+    char burn[BLOCKSIZE - (size_read % BLOCKSIZE)];
 
     block_size = define_block_size(size_read);
 
@@ -22,13 +22,13 @@ int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s) //potential
 
     if (size_read != 0)
     {
-        read(archive_fd, burn, SIZE - (size_read%SIZE));
+        read(archive_fd, burn, BLOCKSIZE - (size_read%BLOCKSIZE));
     }
 
     if (tar_s->tar_state == 0 )
     {
-        if(size_read%SIZE == 0){
-            read(archive_fd, burn, SIZE);
+        if(size_read % BLOCKSIZE == 0){
+            read(archive_fd, burn, BLOCKSIZE);
             tar_s->index += 1;
         }
     }

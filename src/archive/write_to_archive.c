@@ -17,14 +17,10 @@ int write_to_archive(int fd, int archive_fd, ph_t* ph)
         byte_count += write_chunk(fd, archive_fd, buff, block_size);
     }
     
-    if (size_fd % SIZE != 0 ) // temp check to remove
+    if (size_fd % BLOCKSIZE != 0 ) // temp check to remove
     {
         byte_count += padding_null(archive_fd, size_fd%512);
     }
-    // else 
-    // {
-    //     byte_count += padding_null(archive_fd, 0);
-    // }
 
     close(fd);
     return byte_count;

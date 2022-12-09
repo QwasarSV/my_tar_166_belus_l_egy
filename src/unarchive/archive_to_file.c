@@ -26,6 +26,3 @@ void archive_to_file(my_getopt_t *getopt_ptr)
     //     free(ph);
     // }
     // while (write_to_file(archive_fd, fd, size_fd) > 0); // NO !!!!!
-
-
-

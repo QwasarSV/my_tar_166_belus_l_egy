@@ -12,19 +12,3 @@ int write_chunk(int fd, int archive_fd, char* buff, int block_size) // USED IN W
 
     return byte_count;
 }
-
-int write_chunk02(int fd, int archive_fd, char* buff, int block_size, int file_size) // USED IN WRITE_TO_FILE.C
-{
-    int byte_count = 0, initial_size = 0; 
-
-    while (byte_count < file_size 
-    && (initial_size = read(archive_fd, buff, block_size)))
-    {
-        byte_count += write(fd, buff, initial_size);
-        if (file_size > SIZE && file_size - byte_count < SIZE)
-        {
-            block_size = file_size - byte_count;
-        }
-    }
-    return byte_count;
-}

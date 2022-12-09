@@ -3,14 +3,7 @@
 
 int padding_null(int fd, int size) 
 {
-    char padding[SIZE] = {'\0'};
-    write(fd, padding, SIZE - size);
-    return (SIZE - size);
-    // if(size == 512) {
-    //     write(fd, padding, SIZE);
-    // }
-    // else
-    // {
-        
-    // }
+    char padding[BLOCKSIZE] = {'\0'};
+    write(fd, padding, BLOCKSIZE - size);
+    return (BLOCKSIZE - size);
 }

@@ -1,21 +1,20 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
 
-int read_to_pos(int archive_fd, int size_read, my_getopt_t* getopt_ptr) //potential unused arguments need to make a new function; 
+int read_to_pos(int archive_fd, int size_read) //potential unused arguments need to make a new function; 
 {
-    int byte_count = 0, initial_size = 0, block_size = SIZE;
+    int byte_count = 0, initial_size = 0, block_size = BLOCKSIZE;
     char buff[size_read];
-    char burn[SIZE - (size_read%SIZE)];
+    char burn[BLOCKSIZE - (size_read % BLOCKSIZE)];
 
     block_size = define_block_size(size_read);
-    printf("rtp - size file %i\n", size_read);
+   // printf("rtp - size file %i\n", size_read);
     byte_count = read_chunk02(archive_fd, buff, block_size, size_read);
-    printf("byte_count - read_chunk: %i\n", byte_count);
+   // printf("byte_count - read_chunk: %i\n", byte_count);
 
-    if (size_read % SIZE != 0)
+    if (size_read % BLOCKSIZE != 0)
     {
-        printf("byte_count - padding: %i\n",SIZE - (size_read%SIZE) );
-        byte_count += read(archive_fd, burn, SIZE - (size_read%SIZE));
+     //   printf("byte_count - padding: %i\n",SIZE - (size_read%SIZE) );
+        byte_count += read(archive_fd, burn, BLOCKSIZE - (size_read%BLOCKSIZE));
     }
 
     return byte_count;

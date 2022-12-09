@@ -2,7 +2,6 @@
 
 char* my_strncpy(char* str1, char* str2, int n)
 {
-
     int index = 0;
 
     while(index < n){

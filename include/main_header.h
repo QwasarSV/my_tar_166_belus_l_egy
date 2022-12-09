@@ -115,7 +115,7 @@ typedef struct posix_header
 #define BADARG (int)':'
 //#define VALID_ARG_LS "-1at"
 #define VALID_ARG_TAR "-cfrtux"
-#define SIZE 512
+#define BLOCKSIZE 512
 
 
 
@@ -194,7 +194,7 @@ void field_update(char* str, int value, size_t size);
 int inter_size(char* str, size_t len);
 // r fn
 int set_fd_pos(int archive_fd, my_getopt_t* getopt_ptr);
-int read_to_pos(int archive_fd, int size_read, my_getopt_t* getopt_ptr) ;
+int read_to_pos(int archive_fd, int size_read) ;
 
 //void write_struct(int fd, ph_t* ph);
 
@@ -229,6 +229,7 @@ void init_tar_map(my_tar_struct* tar_s, int archive_blck_size);
 int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s);
 void tar_map_file(int byte_count, my_tar_struct* tar_s);
 void store_filenames(my_tar_struct* tar_s, char* filename, char* mtim, int index);
+void free_store_filenames(my_tar_struct* tar_s);
 //int check_u_state(char* filename_ph, my_getopt_t* getopt_ptr,char* archive_buff, int size_fd);
 
 //read fn

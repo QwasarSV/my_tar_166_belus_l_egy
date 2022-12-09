@@ -8,6 +8,6 @@ int define_block_size(int size_fd)
     }
     else
     {
-        return SIZE;
+        return BLOCKSIZE;
     }
 }

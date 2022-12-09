@@ -1,20 +1,5 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
 
-/* UNDESIRED SOLUTION
-
-OBJECTIF: FIND FILENAME ABSENT FROM ARCHIVE.
-
-REQUIREMENT TO COMPLETE U FLAG, 
-    STORE FILENAME INTO ARRAY:
-    - OPEN ARCHIVE
-    - GET NB OF STRING AND SIZE;
-    - CLOSE ARCHIVE
-    - OPEN ARCHIVE
-    - STORE STRINGS ON ARRAY IN MEMORY 
-    - CLOSE ARCHIVE
-    - CHECK STRING ARRAY AGAINST INPUT
-*/
 
 int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s) // similar function to "archive to file" == need to change accepted args or function structure so it can be more polyvalent.
 {
@@ -34,21 +19,16 @@ int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar
     tar_s->mtim_arr = malloc(sizeof(char*)*tar_s->nbr_str); 
     tar_s->index = 0;
 
-    //my_bzero(filename, my_strlen(filename));
-
-    //read_to_pos_u(archive_fd, byte_count, tar_s);
     map_archive(archive_fd, byte_count, tar_s);
     check_file_arr(getopt_ptr, tar_s);
     int index = 0;
-    printf("\n state arr : ");
 
-    if (size_fd%SIZE == 0)
+    if (size_fd % BLOCKSIZE == 0)
     {
-        byte_count += SIZE;
+        byte_count += BLOCKSIZE;
     }
 
-    // byte_count += SIZE;
-    block_count = byte_count/SIZE;
+    block_count = byte_count / BLOCKSIZE;
     close(tmp_fd);
     return block_count;
 }

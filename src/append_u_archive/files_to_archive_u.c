@@ -23,17 +23,19 @@ void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head)
             getopt_ptr->state[index] = 1;
         }
 
-        printf("state but main fn : %i\n",getopt_ptr->state[index]);
+       // printf("state but main fn : %i\n",getopt_ptr->state[index]);
         if (getopt_ptr->state[index] == true )
         {
             fd = open(getopt_ptr->path_arr[index], O_RDONLY);
-            printf("strpath %s", getopt_ptr->path_arr[index]);
+          //  printf("strpath %s", getopt_ptr->path_arr[index]);
             block_count += write_to_archive(fd, archive_fd, ph);
         }
         free(ph);
     }
 
-    printf("countblock : %i \n", block_count);
+    free_store_filenames(tar_s);
+    free(tar_s->tar_map);
+    free(tar_s);
 
     end_block(archive_fd, block_count);
 
