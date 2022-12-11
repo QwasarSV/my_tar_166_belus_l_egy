@@ -117,15 +117,15 @@ typedef struct posix_header
 #define VALID_ARG_TAR "-cfrtux"
 #define BLOCKSIZE 512
 
-
-
-
 char my_is_type(struct stat st);
 
 unsigned long int wrap_arround(unsigned int i);
 void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
 int define_block_size(int size_fd);
 
+//temp path handler
+int path_to_name(char* str);
+void swd(char* str, int pos);
 
 // myls core components
 int flag_parser(int argc, char **argv, char *valid_args, my_getopt_t *getopt_ptr);
@@ -183,7 +183,7 @@ int write_to_archive(int fd, int write_archive_fd, ph_t* ph);
 int read_header(int fd, ph_t* ph);
 //void write_header(int fd, ph_t* ph);
 int write_to_file(int write_fd, int write_file_fd, int file_size);
-ph_t* fill_ph(node_t* head, ph_t* ph, char* file_name);
+ph_t* fill_ph(node_t* m_head, ph_t* ph, char* file_name);
 int padding_null(int fd, int size);
 
 //header specific

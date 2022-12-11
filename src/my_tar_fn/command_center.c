@@ -2,7 +2,7 @@
 #include <stdio.h>
 void command_center(my_getopt_t* getopt_ptr, node_t* m_head)
 {
-    clean_llist(m_head, getopt_ptr); // need to relocate these fn in a place that makes sens
+    //clean_llist(m_head, getopt_ptr); // need to relocate these fn in a place that makes sens
 
 
     if (getopt_ptr->bool_arr[0] == 0)
