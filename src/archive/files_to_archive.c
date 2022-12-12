@@ -28,6 +28,10 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
 
                 swd(getopt_ptr->path_arr[index], pos);
                 ph = fill_ph(m_head, ph, &getopt_ptr->path_arr[index][pos + 1]);
+                my_strcpy(ph->name, &getopt_ptr->path_arr[index][1]);
+                int sum = header_size(ph);
+                field_update(ph->chksum, sum, sizeof(ph->chksum) -1); //
+                ph->chksum[sizeof(ph->chksum) -1] = ' ';
                 //printf("ph_name :%s\n", ph->name);
                 fd = open(&getopt_ptr->path_arr[index][pos + 1], O_RDONLY);
                
