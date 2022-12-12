@@ -8,7 +8,7 @@ int write_to_file(int archive_fd, int fd, int file_size)
     char buff[file_size];
 
     block_size = define_block_size(file_size);
-
+    // printf("write_to_file - blocksize : %i\n", block_size );
     byte_count = write_chunk02(fd, archive_fd, buff, block_size, file_size);
 
     read(archive_fd, burn02, BLOCKSIZE - (file_size % BLOCKSIZE));
