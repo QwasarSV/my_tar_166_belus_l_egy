@@ -11,8 +11,6 @@ void read_archive(int archive_fd, my_getopt_t* getopt_ptr)
         read_header(archive_fd, ph);
 
         fd = open(ph->name, getopt_ptr->oflag, 0644);
-        
-        //
 
         size_file = my_ctoi(ph->size, my_strlen(ph->size));
         size_file = oct_to_dec(size_file);

@@ -18,7 +18,7 @@ int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar
     tar_s->mtim_arr = malloc(sizeof(char*)*tar_s->nbr_str); 
     tar_s->index = 0;
 
-    map_archive(archive_fd, byte_count, tar_s);
+    map_archive(archive_fd, byte_count - BLOCKSIZE, tar_s);
     check_file_arr(getopt_ptr, tar_s);
 
     if (size_fd % BLOCKSIZE == 0)

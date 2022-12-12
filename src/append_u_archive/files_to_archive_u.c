@@ -17,27 +17,27 @@ void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head)
     {
         index++;
         ph = malloc(sizeof(ph_t));
-        ph = fill_ph(m_head->daughter_head, ph, getopt_ptr->path_arr[index]);
+        ph = fill_ph(m_head, ph, getopt_ptr->path_arr[index]);
         if(check_mtime(ph, tar_s) == true)
         {
             getopt_ptr->state[index] = 1;
         }
 
-       // printf("state but main fn : %i\n",getopt_ptr->state[index]);
+       printf("file_to_archive - state : %i\n",getopt_ptr->state[index]);
         if (getopt_ptr->state[index] == true )
         {
             fd = open(getopt_ptr->path_arr[index], O_RDONLY);
-          //  printf("strpath %s", getopt_ptr->path_arr[index]);
-            block_count += write_to_archive(fd, archive_fd, ph);
+           printf("file_to_archive - strpath %s \n", getopt_ptr->path_arr[index]);
+            block_count += write_to_archive(fd, archive_fd, ph)/BLOCKSIZE;
         }
         free(ph);
     }
-
+    printf("file_to_archive - block_count %i\n", block_count);
     free_store_filenames(tar_s);
     free(tar_s->tar_map);
     free(tar_s);
 
-    end_block(archive_fd, block_count);
+    end_block(archive_fd, block_count-1);
 
     close(archive_fd);
 }
