@@ -15,7 +15,7 @@ ph_t* fill_ph(node_t* m_head, ph_t* ph, char* file_name)
         tmp = m_tmp->daughter_head;
         while (tmp != NULL)
         {
-            printf("PH VALUE %s \n", tmp->path_name);
+            //printf("PH VALUE %s \n", tmp->path_name);
             if (my_strcmp(file_name, tmp->path_name) == 0)
             {
                 set_header(ph);

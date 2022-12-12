@@ -3,7 +3,7 @@
 
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head) 
 {
-    int fd = 0, archive_fd = 0, index = 0, byte_count = 0, block_count = 0;
+    int fd = 0, archive_fd = 0, index = 0, byte_count = 0, block_count = 0, pos = 0;
     ph_t* ph;
 
     archive_fd = open(getopt_ptr->path_arr[index], getopt_ptr->oflag , 0644);
@@ -19,18 +19,16 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
         if (getopt_ptr->bool_arr[1] == true || getopt_ptr->bool_arr[2] == true)
         {
             ph = malloc(sizeof(ph_t));
-            //need to slice if path instead of file 
-            
-            int pos = path_to_name(getopt_ptr->path_arr[index]);
-
-            printf("str %s\n", &getopt_ptr->path_arr[index][pos +1]);
+            pos = path_to_name(getopt_ptr->path_arr[index]);
+            //printf("pos %i",pos);
+            //printf("str %s\n", &getopt_ptr->path_arr[index][pos + 1]);
 
             if(pos > 1)
             {
 
                 swd(getopt_ptr->path_arr[index], pos);
                 ph = fill_ph(m_head, ph, &getopt_ptr->path_arr[index][pos + 1]);
-                printf("ph_name :%s\n", ph->name);
+                //printf("ph_name :%s\n", ph->name);
                 fd = open(&getopt_ptr->path_arr[index][pos + 1], O_RDONLY);
                
             }
@@ -39,7 +37,7 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
                 ph = fill_ph(m_head, ph, getopt_ptr->path_arr[index]);
                 fd = open(getopt_ptr->path_arr[index], O_RDONLY);
             }
-            printf("fd %d\n", fd);
+            //printf("fd %d\n", fd);
             byte_count += write_to_archive(fd, archive_fd, ph);
             free(ph);
             chdir(getopt_ptr->home);

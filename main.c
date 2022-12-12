@@ -29,7 +29,7 @@ int main(int argc, char** argv)
         while(index < getopt_ptr->nbr_str)
         {
             int pos = path_to_name(getopt_ptr->path_arr[index]);
-            printf("str_%s\n", getopt_ptr->path_arr[index]);
+           // printf("str_%s\n", getopt_ptr->path_arr[index]);
             if(pos > 1)
             {
                 swd(getopt_ptr->path_arr[index], pos);
