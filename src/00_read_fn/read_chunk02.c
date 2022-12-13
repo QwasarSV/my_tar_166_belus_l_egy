@@ -1,5 +1,6 @@
-
 #include "../../include/main_header.h"
+
+//get byte_count for fd
 
 int read_chunk02(int fd, char* buff, int block_size, int file_size)
 {

@@ -1,6 +1,4 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 void end_block(int fd, int block_count)
 {

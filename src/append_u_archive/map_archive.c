@@ -1,9 +1,8 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
 
-//state machine 
+//state machine get byte count for archive fd and map fd
 
-int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s) //potential unused arguments need to make a new function; 
+int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s)
 {
     int byte_count = 0, block_size = BLOCKSIZE;
     char buff[size_read];

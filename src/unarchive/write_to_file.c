@@ -1,5 +1,6 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
+
+//write files from archive to dir
 
 int write_to_file(int archive_fd, int fd, int file_size)
 {
@@ -8,7 +9,6 @@ int write_to_file(int archive_fd, int fd, int file_size)
     char buff[file_size];
 
     block_size = define_block_size(file_size);
-    // printf("write_to_file - blocksize : %i\n", block_size );
     byte_count = write_chunk02(fd, archive_fd, buff, block_size, file_size);
 
     read(archive_fd, burn02, BLOCKSIZE - (file_size % BLOCKSIZE));
@@ -16,13 +16,3 @@ int write_to_file(int archive_fd, int fd, int file_size)
 
     return byte_count;
 }
-//replaced by write_chunk02
-    // while (result < file_size && (initial_size = read(archive_fd, file_RnW_buffer, block_size)))
-    // {
-    //     result += write(fd, file_RnW_buffer, initial_size);
-
-    //     if (file_size > SIZE && file_size - result < SIZE)
-    //     {
-    //         block_size = file_size - result;
-    //     }
-    // }

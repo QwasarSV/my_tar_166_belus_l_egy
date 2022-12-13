@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "../../include/main_header.h"
 // compare time and return 1 if file has been modified
 

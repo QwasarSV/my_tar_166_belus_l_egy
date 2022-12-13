@@ -35,7 +35,7 @@ ph_t* fill_ph(node_t* m_head, ph_t* ph, char* file_name)
                 my_strcpy(ph->gname, getgrgid(tmp->st.st_gid)->gr_name);
 
                 sum = header_size(ph);
-                field_update(ph->chksum, sum, sizeof(ph->chksum) -1); //
+                field_update(ph->chksum, sum, sizeof(ph->chksum) -1);
                 ph->chksum[sizeof(ph->chksum) -1] = ' ';
                 return ph;
             }

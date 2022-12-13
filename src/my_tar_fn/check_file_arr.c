@@ -1,4 +1,6 @@
 #include "../../include/main_header.h"
+
+// check if file is present within archive and map it out;
 void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s)
 {
     int index = 1, jndex = 0;

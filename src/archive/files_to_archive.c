@@ -1,19 +1,21 @@
 #include "../../include/main_header.h"
 #include <stdio.h>
 
+// set fd position for -rf and then write to archive 
+
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head) 
 {
     int fd = 0, archive_fd = 0, index = 0, byte_count = 0, block_count = 0, pos = 0;
     ph_t* ph;
 
     archive_fd = open(getopt_ptr->path_arr[index], getopt_ptr->oflag , 0644);
-    //index++;
+
     if (getopt_ptr->bool_arr[2] == true || getopt_ptr->bool_arr[4] == true)
     {
         block_count += set_fd_pos(archive_fd , getopt_ptr);
     }
 
-    while (index < getopt_ptr->nbr_str -1) // evolution: need to be based on valid nodes or valid strings == need security check
+    while (index < getopt_ptr->nbr_str -1)
     {
         index++;
         if (getopt_ptr->bool_arr[1] == true || getopt_ptr->bool_arr[2] == true)

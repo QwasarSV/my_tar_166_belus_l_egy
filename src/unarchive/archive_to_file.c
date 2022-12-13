@@ -1,5 +1,6 @@
 #include "../../include/main_header.h"
-#include <stdio.h>
+
+// open archive, read and write files to dir
 
 void archive_to_file(my_getopt_t *getopt_ptr)
 {
@@ -11,17 +12,3 @@ void archive_to_file(my_getopt_t *getopt_ptr)
     
     close(archive_fd);
 }
-
-//write(1, ph, 500); // test check;
-
-//replaced by read_archive
-    // do
-    // {
-    //     ph = malloc(sizeof(ph_t));
-    //     read_header(archive_fd, ph);
-    //     fd = open(ph->name, getopt_ptr->oflag, 0644);
-    //     size_fd = my_ctoi(ph->size, my_strlen(ph->size));
-    //     size_fd = oct_to_dec(size_fd);
-    //     free(ph);
-    // }
-    // while (write_to_file(archive_fd, fd, size_fd) > 0); // NO !!!!!

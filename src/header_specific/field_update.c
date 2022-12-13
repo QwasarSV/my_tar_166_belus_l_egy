@@ -1,5 +1,5 @@
 #include "../../include/main_header.h"
-
+// update independant field
 void field_update(char* str, int value, size_t size)
 {
     int pos = 0;
