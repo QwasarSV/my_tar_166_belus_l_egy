@@ -12,7 +12,7 @@ void read_archive(int archive_fd, my_getopt_t* getopt_ptr)
 
         fd = open(ph->name, getopt_ptr->oflag, 0644);
 
-        size_file = my_ctoi(ph->size, my_strlen(ph->size));
+        size_file = my_ctoi(ph->size, sizeof(ph->size));
         size_file = oct_to_dec(size_file);
         // printf("size_file %i \n", size_file);
         if (getopt_ptr->bool_arr[3] == 1 && ph->name[0] != '\0')

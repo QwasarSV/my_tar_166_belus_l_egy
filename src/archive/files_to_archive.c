@@ -28,11 +28,11 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
 
                 swd(getopt_ptr->path_arr[index], pos);
                 ph = fill_ph(m_head, ph, &getopt_ptr->path_arr[index][pos + 1]);
-                my_strcpy(ph->name, &getopt_ptr->path_arr[index][1]);
+                my_strcpy(ph->name, &getopt_ptr->path_arr[index][0]);
                 int sum = header_size(ph);
                 field_update(ph->chksum, sum, sizeof(ph->chksum) -1); //
                 ph->chksum[sizeof(ph->chksum) -1] = ' ';
-                //printf("ph_name :%s\n", ph->name);
+                // printf("ph_name |%s|\n", ph->name);
                 fd = open(&getopt_ptr->path_arr[index][pos + 1], O_RDONLY);
                
             }
@@ -40,6 +40,10 @@ void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head)
             {
                 ph = fill_ph(m_head, ph, getopt_ptr->path_arr[index]);
                 fd = open(getopt_ptr->path_arr[index], O_RDONLY);
+                if (fd == -1) {
+                    fprintf(stderr, "my_tar: i_don_t_exist: Cannot stat: No such file or directory\n");
+                    continue;
+                }
             }
             //printf("fd %d\n", fd);
             byte_count += write_to_archive(fd, archive_fd, ph);

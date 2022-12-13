@@ -2,7 +2,8 @@
 #define __HEADERFILE_K_
 
 #include <dirent.h> // not a sycall
-#include "/usr/include/x86_64-linux-gnu/sys/stat.h"
+#include <sys/stat.h>
+// #include "/usr/include/x86_64-linux-gnu/sys/stat.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>

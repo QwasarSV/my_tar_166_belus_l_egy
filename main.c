@@ -48,5 +48,5 @@ int main(int argc, char** argv)
     }
 
     free_opt(argc, argv, getopt_ptr);
-    return 1;
+    return EXIT_SUCCESS;
 }
