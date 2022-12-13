@@ -31,6 +31,22 @@ The approach, however, produced a complete understanding of the project scope.
 - Regroup functions to increase code weight and accessibility (overall performance improvement).
 - Finish implementing recursive directory search and extraction.(functionnalities improvement)
 
+
+Project structure : 
+
+```
+                                                                  ______read archive (-tf)
+                                                                 |
+                                                                 |______unarchive (-xf)
+     user input-----analyse user input----Seek file information--|  
+                                                                 |____________________________________archive(-cf)
+                                                                 |                                    ^
+                                                                 |                                    |
+                                                                 |_______________________set FD_______|(-rf)
+                                                                 |                                   
+                                                                 |                                   
+                                                                 |______map archive______set FD_______archive(-uf)
+```
 ## Installation
 
 To compile my_tar :
@@ -41,7 +57,7 @@ To remove my_tar :
 
 ## Usage
 
-- the option are : 
+- The options are : 
     * ``-cf`` to archive
     * ``-rf`` to append
     * ``-uf`` to append new files or new version of already present files
