@@ -1,7 +1,8 @@
 #include "../../include/main_header.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-int end_block(int fd, int block_count)
+void end_block(int fd, int block_count)
 {
     int count = 0, index = 0;
 
@@ -14,7 +15,6 @@ int end_block(int fd, int block_count)
     while (index < count)
     {
         padding_null(fd, 0);
-        index +=1;
+        index += 1;
     }
-    return 1;
 }

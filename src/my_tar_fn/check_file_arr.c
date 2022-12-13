@@ -11,10 +11,6 @@ void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s)
             if (my_strcmp(getopt_ptr->path_arr[index], tar_s->str_arr[jndex]) == 0)
             {
                 state = false;
-                // if (my_strcmp(getopt_ptr->path_arr[index], tar_s->str_arr[jndex]) != 0){
-                    
-                // }
-                
             }
             jndex++;
         }

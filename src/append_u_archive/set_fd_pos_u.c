@@ -1,5 +1,6 @@
 #include "../../include/main_header.h"
 
+// set archive fd, get archive size without blocks, perfom mapping of content
 
 int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s) // similar function to "archive to file" == need to change accepted args or function structure so it can be more polyvalent.
 {

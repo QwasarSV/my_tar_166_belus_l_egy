@@ -2,7 +2,7 @@
 
 int define_block_size(int size_fd)
 {
-    if (size_fd < 512)
+    if (size_fd < BLOCKSIZE)
     {
         return size_fd; 
     }

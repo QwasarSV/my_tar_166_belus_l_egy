@@ -23,13 +23,10 @@ int read_archive03(int fd, my_tar_struct* tar_s)
     while (filename[0] != '\0' && map_archive(fd, file_size, tar_s) > 0);
     
     int index = 0;
-    //printf("\ntar_map :");
     while(index < tar_s->index)
     {
-        ///printf("%i-",tar_s->tar_map[index]);
         index++;
     }
-    //printf("\n");
     tar_s->tar_state += 1;
 
     free(filename);

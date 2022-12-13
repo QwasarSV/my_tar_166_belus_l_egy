@@ -111,45 +111,34 @@ typedef struct posix_header
 #define DIR_T '5'
 #define FIFO_T '6'
 
-
 #define BADCHAR (int)'?'
 #define BADARG (int)':'
 //#define VALID_ARG_LS "-1at"
 #define VALID_ARG_TAR "-cfrtux"
 #define BLOCKSIZE 512
 
-char my_is_type(struct stat st);
-
-unsigned long int wrap_arround(unsigned int i);
-void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
-int define_block_size(int size_fd);
-
 //temp path handler
 int path_to_name(char* str);
 void swd(char* str, int pos);
 
-// myls core components
+
 int flag_parser(int argc, char **argv, char *valid_args, my_getopt_t *getopt_ptr);
     void count_path_array(int argc, char** argv, my_getopt_t *getopt_ptr);
     void dynamic_malloc(int argc, char** argv, my_getopt_t *getopt_ptr);
     int my_getopt(char **argv, char *optstr, my_getopt_t *getopt_ptr);
     void n_state(char opt, my_getopt_t *getopt_ptr, char** argv);
-
-
 void sort_str_arr(my_getopt_t *getopt_ptr);
+
+//node_fn
 node_t* create_llist(struct dirent * pDirent, DIR *pDir, node_t *head, node_t *tmp_node);
-void sort_asc(node_t* m_node);
-void lexi_sort(node_t* m_node);
 void print_and_free_llist(node_t* m_head, my_getopt_t *getopt_ptr);
 void dynamic_free(int argc, char** argv, my_getopt_t *getopt_ptr);
 void free_opt(int argc, char** argv, my_getopt_t *getopt_ptr);
 void fill_bool_array(bool* bool_arr, int len);
 void init_getopt(my_getopt_t* getopt_ptr, char* valid_args);
-
 node_t* get_info(node_t* m_head, node_t* head, int index);
 
 //my string
-
 char* my_strchr(char* str1, char ch);
 int my_strcmp(char* str1, char* str2);
 char* my_strcpy(char* str_dest, char* str_src);
@@ -174,67 +163,59 @@ node_t* free_single_node(node_t* head);
 node_t* select_node(node_t* head, my_getopt_t* getopt_ptr);
 
 
-//archive fn
+char my_is_type(struct stat st);
+void command_center(my_getopt_t* getopt_ptr, node_t* m_head);
+int define_block_size(int size_fd);
+
+
+// -cf archive fn
 void files_to_archive(my_getopt_t *getopt_ptr, node_t* m_head);
 void get_archive_info(my_getopt_t *getopt_ptr);
 void archive_to_file(my_getopt_t *getopt_ptr);
-int end_block(int fd, int block_count);
+void end_block(int fd, int block_count);
 int write_to_archive(int fd, int write_archive_fd, ph_t* ph);
-//ph_t* read_header(int fd, ph_t* ph);
 int read_header(int fd, ph_t* ph);
-//void write_header(int fd, ph_t* ph);
 int write_to_file(int write_fd, int write_file_fd, int file_size);
 ph_t* fill_ph(node_t* m_head, ph_t* ph, char* file_name);
 int padding_null(int fd, int size);
 
-//header specific
+//-cf header specific
 int header_size (ph_t * header);
 void set_header_field(void *generic_ptr, char ch, size_t size);
 void set_header(ph_t* ph);
 void field_update(char* str, int value, size_t size);
 int inter_size(char* str, size_t len);
-// r fn
+
+// -rf  append 
 int set_fd_pos(int archive_fd, my_getopt_t* getopt_ptr);
-int read_to_pos(int archive_fd, int size_read) ;
-
-//void write_struct(int fd, ph_t* ph);
-
+int read_to_pos(int archive_fd, int size_read);
 
 // itoa/ctoi
 void my_revswap(char *ptr, char*ptr1, char tmp_char);
-char* their_itoa(int value, char* result, int base);
 char* unsigned_itoa(unsigned long int value, char* result, int base);
-//long long oct_to_dec(int value);
-int oct_to_dec(int value);
-//long long oct_to_dec(long long int value);
 char* itoa_long_long(long long value, char* result, int base);
 int my_iterative_pow(int value, int power);
 int my_ctoi(char *string, size_t n);
-
-//void map_tar(node_t* head, my_getopt_t* getopt_ptr);
+int oct_to_dec(int value);
 void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
 void clean_llist(node_t* m_head, my_getopt_t *getopt_ptr);
 
-
-//uflag specific
+//-uf append new or modified files
 void files_to_archive_u(my_getopt_t *getopt_ptr, node_t* m_head);
 void m_node_iteration(node_t* m_head, my_getopt_t *getopt_ptr);
 int get_archive_size(node_t* head, my_getopt_t* getopt_ptr);
 int set_fd_pos_u(int archive_fd, node_t* m_head, my_getopt_t *getopt_ptr, my_tar_struct* tar_s);
-//int read_to_pos_u(int archive_fd, int size_read, my_tar_struct* tar_s);
 void check_file_arr(my_getopt_t* getopt_ptr, my_tar_struct* tar_s);
 int check_mtime(ph_t* ph, my_tar_struct* tar_s);
 
-
+// tar mapping
 void init_tar_map(my_tar_struct* tar_s, int archive_blck_size);
 int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s);
 void tar_map_file(int byte_count, my_tar_struct* tar_s);
 void store_filenames(my_tar_struct* tar_s, char* filename, char* mtim, int index);
 void free_store_filenames(my_tar_struct* tar_s);
-//int check_u_state(char* filename_ph, my_getopt_t* getopt_ptr,char* archive_buff, int size_fd);
 
 //read fn
-//int read_chunk(int fd, char* buff, int block_size, int size_file);
 int read_chunk02(int fd, char* buff, int block_size, int file_size);
 int read_chunk03(int fd, char* buff, int block_size, int size_file, my_tar_struct* tar_s);
 
@@ -245,8 +226,5 @@ int read_archive03(int fd, my_tar_struct* tar_s);
 int write_chunk(int fd, int archive_fd, char* buff, int block_size);
 int write_chunk02(int fd, int archive_fd, char* buff, int block_size, int file_size);
 int write_header(int fd, ph_t* ph);
-
-unsigned int base_converter(unsigned int val, int base);
-int sum_ascii(char* str);
 
 #endif

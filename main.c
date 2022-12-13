@@ -1,12 +1,10 @@
 #include "include/main_header.h"
 #include <stdio.h>
-// NOT FINAL WIP
-//mytar [OPTION]... [ -f archive.tar] [dir1] [dir2] [dir3]
 
 int main(int argc, char** argv)
 {
     int len = my_strlen(argv[2]) - 4;
-    
+
     if (my_strcmp(&argv[2][len], ".tar") != 0)
     {
         return 0;
@@ -29,7 +27,6 @@ int main(int argc, char** argv)
         while(index < getopt_ptr->nbr_str)
         {
             int pos = path_to_name(getopt_ptr->path_arr[index]);
-           // printf("str_%s\n", getopt_ptr->path_arr[index]);
             if(pos > 1)
             {
                 swd(getopt_ptr->path_arr[index], pos);

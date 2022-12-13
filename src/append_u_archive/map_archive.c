@@ -1,6 +1,8 @@
 #include "../../include/main_header.h"
 #include <stdio.h>
 
+//state machine 
+
 int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s) //potential unused arguments need to make a new function; 
 {
     int byte_count = 0, block_size = BLOCKSIZE;
@@ -22,7 +24,7 @@ int map_archive(int archive_fd, int size_read, my_tar_struct* tar_s) //potential
 
     if (size_read != 0)
     {
-        read(archive_fd, burn, BLOCKSIZE - (size_read%BLOCKSIZE));
+        read(archive_fd, burn, BLOCKSIZE - (size_read % BLOCKSIZE));
     }
 
     if (tar_s->tar_state == 0 )
